@@ -1,0 +1,22 @@
+exposure_dat<-readxl::read_xlsx("20edumi90th.xlsx")
+F.data <- format_mvmr(BXGs = exposure_dat[,c(2,3)],
+                      BYG = exposure_dat[,6],
+                      seBXGs = exposure_dat[,c(4,5)],
+                      seBYG = exposure_dat[,7],
+                      RSID = exposure_dat[,1])
+res <- ivw_mvmr(r_input = F.data)
+strength_mvmr <- strength_mvmr(F.data, gencov=0)
+MRMVInputObject <- mr_mvinput(bx = cbind(exposure_dat$'beta.edu',exposure_dat$'beta.mediator'), 
+                              bxse = cbind(exposure_dat$'se.edu',exposure_dat$'se.mediator'), 
+                              by = exposure_dat$'beta.long', byse =exposure_dat$'se.long')
+mvivw <- mr_mvivw(MRMVInputObject,
+                  model = "default",
+                  correl = FALSE,
+                  distribution = "normal",
+                  alpha = 0.05)
+mvmregger <-  mr_mvegger(MRMVInputObject, 
+                         orientate = 1,
+                         correl = FALSE,
+                         distribution = "normal", 
+                         alpha = 0.05)
+

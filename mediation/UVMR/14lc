@@ -1,0 +1,23 @@
+edu_exp <- readxl::read_xlsx("edu_exp.xlsx")
+#############################
+outcome: lung cancer  
+#############################
+lc_out <- extract_outcome_data(
+  snps=sed_exp$SNP,
+  outcomes=c('ieu-a-966'),
+  proxies = TRUE,
+  maf_threshold = 0.01,
+  access_token = NULL
+)
+mydata <- harmonise_data(
+  exposure_dat=edu_exp,
+  outcome_dat=lc_out,
+  action= 2
+)
+res <- mr(mydata)
+het <- mr_heterogeneity(mydata)
+pleio <- mr_pleiotropy_test(mydata)
+presso <- mr_presso(BetaOutcome = "beta.outcome", BetaExposure = "beta.exposure", 
+                    SdOutcome = "se.outcome", SdExposure = "se.exposure", 
+                    OUTLIERtest = TRUE, DISTORTIONtest = TRUE, data =mydata, 
+                    NbDistribution = 1000,SignifThreshold = 0.05)  

@@ -1,0 +1,97 @@
+income_exp <- readxl::read_xlsx("2income_exp.xlsx")
+######################
+outcome:parental lifespan
+######################
+pl_out <- format_data(
+  dat=parentallifespan,
+  type = "outcome",
+  snps = income_exp$SNP,
+  header = TRUE,
+  phenotype_col = "phenotype",
+  snp_col = "rsid",
+  beta_col = "beta1",
+  se_col = "se",
+  effect_allele_col = "a1",
+  other_allele_col = "a0",
+  eaf_col = "freq1",
+  pval_col = "p",
+  chr_col = "chr",
+  pos_col = "pos"
+)
+mydata <- harmonise_data(
+  exposure_dat=income_exp,
+  outcome_dat=pl_out,
+  action= 2
+)
+res <- mr(mydata)
+het <- mr_heterogeneity(mydata)
+pleio <- mr_pleiotropy_test(mydata)
+presso <- mr_presso(BetaOutcome = "beta.outcome", BetaExposure = "beta.exposure", 
+                    SdOutcome = "se.outcome", SdExposure = "se.exposure", 
+                    OUTLIERtest = TRUE, DISTORTIONtest = TRUE, data =mydata, 
+                    NbDistribution = 1000,SignifThreshold = 0.05)  
+######################
+outcome:90th self-longevity
+######################
+90th_out <- format_data(
+  dat=90thselflongevity,
+  type = "outcome",
+  snps = income_exp$SNP,
+  header = TRUE,
+  phenotype_col = "phenotype",
+  snp_col = "SNP",
+  beta_col = "Beta",
+  se_col = "SE",
+  effect_allele_col = "EA",
+  other_allele_col = "NEA",
+  eaf_col = "EAF",
+  pval_col = "P-value",
+  chr_col = "Chr",
+  pos_col = "Position"
+)
+mydata <- harmonise_data(
+  exposure_dat=income_exp,
+  outcome_dat=90th_out,
+  action= 2
+)
+res <- mr(mydata)
+het <- mr_heterogeneity(mydata)
+pleio <- mr_pleiotropy_test(mydata)
+presso <- mr_presso(BetaOutcome = "beta.outcome", BetaExposure = "beta.exposure", 
+                    SdOutcome = "se.outcome", SdExposure = "se.exposure", 
+                    OUTLIERtest = TRUE, DISTORTIONtest = TRUE, data =mydata, 
+                    NbDistribution = 1000,SignifThreshold = 0.05)  
+######################
+outcome:99th self-longevity
+######################
+99th_out <- format_data(
+  dat=99thselflongevity,
+  type = "outcome",
+  snps = income_exp$SNP,
+  header = TRUE,
+  phenotype_col = "phenotype",
+  snp_col = "SNP",
+  beta_col = "Beta",
+  se_col = "SE",
+  effect_allele_col = "EA",
+  other_allele_col = "NEA",
+  eaf_col = "EAF",
+  pval_col = "P-value",
+  chr_col = "Chr",
+  pos_col = "Position"
+)
+mydata <- harmonise_data(
+  exposure_dat=income_exp,
+  outcome_dat=99th_out,
+  action= 2
+)
+res <- mr(mydata)
+het <- mr_heterogeneity(mydata)
+pleio <- mr_pleiotropy_test(mydata)
+presso <- mr_presso(BetaOutcome = "beta.outcome", BetaExposure = "beta.exposure", 
+                    SdOutcome = "se.outcome", SdExposure = "se.exposure", 
+                    OUTLIERtest = TRUE, DISTORTIONtest = TRUE, data =mydata, 
+                    NbDistribution = 1000,SignifThreshold = 0.05)  
+
+
+
