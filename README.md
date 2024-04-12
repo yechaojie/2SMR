@@ -5,4 +5,4 @@ Chao-Jie Ye#, Li-Jie Kong#, Yi-Ying Wang#, Chun Dou, Jie Zheng, Min Xu, Yu Xu, M
 
 # Requirements
 - [**R**](https://www.r-project.org/)
-- R packages: TwoSampleMR (version 0.5.7), MVMR (version 0.4), MRPRESSO (version 1.0), and MRlap (version 0.0.3.0).
+ - R packages: TwoSampleMR (version 0.5.7), MVMR (version 0.4), MRPRESSO (version 1.0), and MRlap (version 0.0.3.0).
